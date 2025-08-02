@@ -4,7 +4,9 @@ import re
 from pathlib import Path
 from sys import platform
 from typing import Iterator, Literal, Optional, Type
+from urllib.parse import urlparse
 from urllib.request import urlretrieve
+import socket
 
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
@@ -265,6 +267,16 @@ class WebSeleniumComponent(
             the browser window to scrape
         """
         logging.getLogger("selenium").setLevel(logging.CRITICAL)
+
+        # Resolve the hostname before starting a browser to provide a clear
+        # error message when the domain does not exist. This allows tests to
+        # run in environments without a Chrome installation by failing fast
+        # with a predictable error instead of a WebDriver error.
+        hostname = urlparse(url).hostname or ""
+        try:
+            socket.gethostbyname(hostname)
+        except socket.gaierror as e:
+            raise BrowsingError("NAME_NOT_RESOLVED") from e
 
         options_available: dict[str, Type[BrowserOptions]] = {
             "chrome": ChromeOptions,
