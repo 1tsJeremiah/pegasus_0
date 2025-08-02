@@ -1,0 +1,47 @@
+name: Parse Dependabot Alerts Nightly
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Runs every night at 2 AM UTC
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  parse-alerts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Fetch and create issues from open Dependabot alerts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api /repos/${{ github.repository }}/dependabot/alerts > alerts.json
+
+          jq -c '.[]' alerts.json | while read -r alert; do
+            dep=$(echo "$alert" | jq -r '.security_advisory.dependency.package.name // empty')
+            cve=$(echo "$alert" | jq -r '.security_advisory.identifiers[0].value // empty')
+            summary=$(echo "$alert" | jq -r '.security_advisory.summary // empty')
+            sev=$(echo "$alert" | jq -r '.security_advisory.severity // empty')
+            url=$(echo "$alert" | jq -r '.html_url // empty')
+
+            title="Security: $dep ($sev) - $cve"
+            existing=$(gh issue list --search "$title" --state all | grep "$title" || true)
+
+            if [[ -z "$existing" ]]; then
+              echo "Creating issue: $title"
+              gh issue create \
+                --title "$title" \
+                --body "CVE: $cve\nDependency: $dep\nSeverity: $sev\nSummary: $summary\nAdvisory: $url" \
+                --label "security"
+            else
+              echo "Issue already exists: $title"
+            fi
+          done
