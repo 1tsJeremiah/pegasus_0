@@ -1,0 +1,15 @@
+# robots.txt for your site
+
+User-agent: *
+Disallow: /cdn-cgi/
+Disallow: /__cf/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /my-account/
+
+Allow: /
+
+Sitemap: http://198.96.88.177/sitemap
+Sitemap: https://ai.1tsjeremiah.com/sitemap

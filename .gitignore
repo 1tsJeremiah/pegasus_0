@@ -1,0 +1,6 @@
+# Ignore caches, build artifacts, and logs
+.local/
+.npm/
+node_modules/
+*.log
+pnpm-lock.yaml
