@@ -94,12 +94,11 @@ def get_git_user_email() -> str:
 
 
 def get_latest_bulletin() -> tuple[str, bool]:
-    exists = os.path.exists("data/CURRENT_BULLETIN.md")
+    bulletin_path = Path("data") / "CURRENT_BULLETIN.md"
     current_bulletin = ""
-    if exists:
-        current_bulletin = open(
-            "data/CURRENT_BULLETIN.md", "r", encoding="utf-8"
-        ).read()
+    if bulletin_path.exists():
+        with bulletin_path.open("r", encoding="utf-8") as f:
+            current_bulletin = f.read()
     new_bulletin = get_bulletin_from_web()
     is_new_news = new_bulletin != "" and new_bulletin != current_bulletin
 
@@ -112,7 +111,9 @@ def get_latest_bulletin() -> tuple[str, bool]:
         )
 
     if new_bulletin and is_new_news:
-        open("data/CURRENT_BULLETIN.md", "w", encoding="utf-8").write(new_bulletin)
+        bulletin_path.parent.mkdir(parents=True, exist_ok=True)
+        with bulletin_path.open("w", encoding="utf-8") as f:
+            f.write(new_bulletin)
         current_bulletin = f"{Fore.RED}::NEW BULLETIN::{Fore.RESET}\n\n{new_bulletin}"
 
     return f"{news_header}\n{current_bulletin}", is_new_news
