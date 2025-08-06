@@ -1,8 +1,8 @@
 name: Auto-merge bot PRs
 
 on:
-  pull_request_target:
-    types: [opened]
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
 
 permissions:
   contents: write
@@ -10,19 +10,42 @@ permissions:
 
 jobs:
   enable-auto-merge:
-    # Allow auto-merging PRs opened by codex[bot], github-actions[bot] or dependabot[bot]
-    if: >
+    if: >-
+      (github.event.action == 'opened' ||
+       github.event.action == 'reopened' ||
+       github.event.action == 'synchronize') &&
       github.event.pull_request.base.ref == 'main' &&
-      (
-        github.event.pull_request.user.login == 'codex[bot]' ||
-        github.event.pull_request.user.login == 'github-actions[bot]' ||
-        github.event.pull_request.user.login == 'dependabot[bot]'
-      )
+      (github.event.pull_request.user.login == 'codex[bot]' ||
+       github.event.pull_request.user.login == 'github-actions[bot]')
     runs-on: ubuntu-latest
     steps:
       - name: Enable auto-merge
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          merge-method: merge
+      - name: Add auto-merge label
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr merge ${{ github.event.pull_request.number }} --merge --auto
-      - name: Log merge
-        run: echo "Enabled auto merge for PR #${{ github.event.pull_request.number }}"
+        run: gh pr edit ${{ github.event.pull_request.number }} --add-label auto-merge
+      - name: Comment auto-merge
+        if: >-
+          github.event.action == 'opened' &&
+          github.event.pull_request.user.login == 'codex[bot]'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr comment ${{ github.event.pull_request.number }} --body 'Codex-generated fix. Auto-merging if checks pass.'
+
+  sync-merged:
+    if: >-
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main' &&
+      (github.event.pull_request.user.login == 'codex[bot]' ||
+       github.event.pull_request.user.login == 'github-actions[bot]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger sync_merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api repos/${{ github.repository }}/dispatches -f event_type=sync_merge
