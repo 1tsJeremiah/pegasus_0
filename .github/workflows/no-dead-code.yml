@@ -1,0 +1,15 @@
+name: no-dead-code
+on: [push, pull_request]
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail on legacy markers
+        run: |
+          # Add patterns you never want to see in code
+          BAD_PATTERNS='(TODO:REMOVE|LEGACY:|OLD_CODE:)'
+          if git grep -nE "$BAD_PATTERNS" -- ':!**/*.md' ; then
+            echo "Found legacy markers in code. Remove dead code instead of leaving comments."
+            exit 1
+          fi
