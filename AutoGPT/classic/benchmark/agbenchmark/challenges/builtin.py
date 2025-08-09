@@ -69,9 +69,9 @@ class BuiltinChallengeSpec(BaseModel):
         class Eval(BaseModel):
             type: str
             scoring: Optional[Literal["percentage", "scale", "binary"]] = None
-            template: Optional[
-                Literal["rubric", "reference", "question", "custom"]
-            ] = None
+            template: Optional[Literal["rubric", "reference", "question", "custom"]] = (
+                None
+            )
             examples: Optional[str] = None
 
             @field_validator("scoring", "template")
@@ -228,9 +228,11 @@ class BuiltinChallenge(BaseChallenge):
         request.node.user_properties.append(
             (
                 "answers",
-                [r.result for r in eval_results]
-                if request.config.getoption("--keep-answers")
-                else None,
+                (
+                    [r.result for r in eval_results]
+                    if request.config.getoption("--keep-answers")
+                    else None
+                ),
             )
         )
         request.node.user_properties.append(("scores", [r.score for r in eval_results]))
@@ -451,7 +453,4 @@ def load_builtin_challenges() -> Iterator[type[BuiltinChallenge]]:
 
 
 def _challenge_should_be_ignored(json_file_path: Path):
-    return (
-        "challenges/deprecated" in json_file_path.as_posix()
-        or "challenges/library" in json_file_path.as_posix()
-    )
+    return "challenges/library" in json_file_path.as_posix()

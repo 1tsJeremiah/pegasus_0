@@ -47,8 +47,6 @@ logger.debug("Loading challenges...")
 while challenge_spec_files:
     challenge_spec_file = Path(challenge_spec_files.popleft())
     challenge_relpath = challenge_spec_file.relative_to(challenges_path.parent)
-    if challenge_relpath.is_relative_to("challenges/deprecated"):
-        continue
 
     logger.debug(f"Loading {challenge_relpath}...")
     try:

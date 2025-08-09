@@ -51,13 +51,6 @@ def cli(
     configure_logging(logging.DEBUG if debug else logging.INFO)
 
 
-@cli.command(hidden=True)
-def start():
-    raise DeprecationWarning(
-        "`agbenchmark start` is deprecated. Use `agbenchmark run` instead."
-    )
-
-
 @cli.command(default=True)
 @click.option(
     "-N", "--attempts", default=1, help="Number of times to run each challenge."
