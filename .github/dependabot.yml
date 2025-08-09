@@ -1,10 +1,73 @@
 version: 2
 updates:
-  - package-ecosystem: npm
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: weekly
-  - package-ecosystem: github-actions
-    directory: "/"
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    versioning-strategy: increase
+    rebase-strategy: auto
+
+  - package-ecosystem: "pip"
+    directory: "/AutoGPT/autogpt_platform/backend"
     schedule:
-      interval: weekly
+      interval: "weekly"
+    versioning-strategy: increase
+    rebase-strategy: auto
+
+  - package-ecosystem: "pip"
+    directory: "/AutoGPT/autogpt_platform/autogpt_libs"
+    schedule:
+      interval: "weekly"
+    versioning-strategy: increase
+    rebase-strategy: auto
+
+  - package-ecosystem: "pip"
+    directory: "/AutoGPT/classic/benchmark"
+    schedule:
+      interval: "weekly"
+    versioning-strategy: increase
+    rebase-strategy: auto
+
+  - package-ecosystem: "pip"
+    directory: "/AutoGPT/classic/forge"
+    schedule:
+      interval: "weekly"
+    versioning-strategy: increase
+    rebase-strategy: auto
+
+  - package-ecosystem: "pip"
+    directory: "/AutoGPT/classic/original_autogpt"
+    schedule:
+      interval: "weekly"
+    versioning-strategy: increase
+    rebase-strategy: auto
+
+  - package-ecosystem: "pip"
+    directory: "/AutoGPT/docs"
+    schedule:
+      interval: "weekly"
+    versioning-strategy: increase
+    rebase-strategy: auto
+
+  - package-ecosystem: "npm"
+    directory: "/AutoGPT/autogpt_platform/frontend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types: ["minor", "patch"]
+    rebase-strategy: auto
+
+  - package-ecosystem: "npm"
+    directory: "/AutoGPT/classic/benchmark/frontend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types: ["minor", "patch"]
+    rebase-strategy: auto

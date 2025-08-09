@@ -1,0 +1,25 @@
+name: dependabot-automerge
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  enable-auto-merge:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure auto-merge is enabled at repo level
+        run: |
+          echo "Auto-merge must be enabled in repo settings."
+          # This is informational; the next step will fail if it's not enabled.
+
+      - name: Enable auto-merge via gh CLI
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          # Enable auto-merge with the "merge" method. Change to --squash/--rebase if your repo policy requires it.
+          gh pr merge --auto --merge "$PR_URL"
