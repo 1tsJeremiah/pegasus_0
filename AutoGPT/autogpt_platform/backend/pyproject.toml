@@ -54,7 +54,7 @@ python-dotenv = "^1.1.1"
 python-multipart = "^0.0.20"
 redis = "^6.2.0"
 replicate = "^1.0.6"
-sentry-sdk = {extras = ["anthropic", "fastapi", "launchdarkly", "openai", "sqlalchemy"], version = "^2.33.2"}
+sentry-sdk = {extras = ["anthropic", "fastapi", "launchdarkly", "openai", "sqlalchemy"], version = "^2.34.1"}
 sqlalchemy = "^2.0.40"
 strenum = "^0.4.9"
 stripe = "^11.5.0"
