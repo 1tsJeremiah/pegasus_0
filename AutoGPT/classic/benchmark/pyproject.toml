@@ -40,7 +40,7 @@ uvicorn = ">=0.23.2,<1"
 [tool.poetry.group.dev.dependencies]
 black = ">=23.12.1,<26.0.0"
 flake8 = "^7.0.0"
-isort = "^5.13.1"
+isort = "^6.0.1"
 pyright = "^1.1.364"
 pre-commit = "^3.3.3"
 
