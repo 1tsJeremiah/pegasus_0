@@ -31,7 +31,7 @@ hypercorn = "^0.14.4"
 openai = "^1.7.2"
 orjson = "^3.8.10"
 pydantic = "^2.7.2"
-python-dotenv = "^1.0.0"
+python-dotenv = "^1.1.1"
 requests = ">=2.32.4"
 sentry-sdk = "^1.40.4"
 
