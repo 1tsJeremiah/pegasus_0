@@ -863,6 +863,28 @@ test = ["certifi (>=2024)", "cryptography-vectors (==45.0.6)", "pretend (>=0.7)"
 test-randomorder = ["pytest-randomly"]
 
 [[package]]
+name = "dataclass-wizard"
+version = "0.35.1"
+description = "Lightning-fast JSON wizardry for Python dataclasses — effortless serialization right out of the box!"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "dataclass-wizard-0.35.1.tar.gz", hash = "sha256:18c780e3c574c3534cb2bbc447025cff140f0e640cd98e143a7d234c6445d09e"},
+    {file = "dataclass_wizard-0.35.1-py2.py3-none-any.whl", hash = "sha256:30858e14d780a40792fa190d55220a12cd0ef02a3d8fb8373b1eb4363d4b5549"},
+]
+
+[package.dependencies]
+typing-extensions = {version = ">=4.9.0", markers = "python_version <= \"3.12\""}
+
+[package.extras]
+dev = ["Sphinx (==7.4.7) ; python_version == \"3.9\"", "Sphinx (==8.1.3) ; python_version >= \"3.10\"", "attrs (==24.3.0)", "bump2version (==1.0.1)", "coverage (>=6.2)", "dacite (==1.8.1)", "dataclass-factory (==2.16)", "dataclass-wizard[toml]", "dataclasses-json (==0.6.7)", "flake8 (>=3)", "jsons (==1.6.3)", "mashumaro (==3.15)", "matplotlib", "pip (>=21.3.1)", "pydantic (==2.10.3)", "pytest (==8.3.4)", "pytest-benchmark[histogram]", "pytest-cov (==6.0.0)", "pytest-mock (>=3.6.1)", "python-dotenv (>=1,<2)", "pytimeparse (==1.1.8)", "sphinx-autodoc-typehints (==2.5.0)", "sphinx-copybutton (==0.5.2)", "sphinx-issues (==5.0.0)", "tomli (>=2,<3) ; python_version == \"3.10\"", "tomli (>=2,<3) ; python_version == \"3.9\"", "tomli-w (>=1,<2)", "tox (==4.23.2)", "twine (==6.0.1)", "typing-extensions (>=4.9.0)", "watchdog[watchmedo] (==6.0.0)", "wheel (==0.45.1)"]
+dotenv = ["python-dotenv (>=1,<2)"]
+timedelta = ["pytimeparse (>=1.1.7)"]
+toml = ["tomli (>=2,<3) ; python_version == \"3.10\"", "tomli (>=2,<3) ; python_version == \"3.9\"", "tomli-w (>=1,<2)"]
+yaml = ["PyYAML (>=6,<7)"]
+
+[[package]]
 name = "decorator"
 version = "5.2.1"
 description = "Decorators for Humans"
@@ -5721,18 +5743,20 @@ test = ["pytest", "ruff"]
 
 [[package]]
 name = "todoist-api-python"
-version = "2.1.7"
-description = "Official Python SDK for the Todoist REST API."
+version = "3.1.0"
+description = "Official Python SDK for the Todoist API."
 optional = false
-python-versions = "<4.0,>=3.9"
+python-versions = "~=3.9"
 groups = ["main"]
 files = [
-    {file = "todoist_api_python-2.1.7-py3-none-any.whl", hash = "sha256:278bfe851b9bd19bde5ff5de09d813d671ef7310ba55e1962131fca5b59bb735"},
-    {file = "todoist_api_python-2.1.7.tar.gz", hash = "sha256:84934a19ccd83fb61010a8126362a5d7d6486c92454c111307ba55bc74903f5c"},
+    {file = "todoist_api_python-3.1.0-py3-none-any.whl", hash = "sha256:20ee2445983235566e7f2b2c82f769b9a265bb3fa6d7aad3fa73cf9e2d4cd787"},
+    {file = "todoist_api_python-3.1.0.tar.gz", hash = "sha256:7cad732f58a4bdfbd1c073a1a8be1c1b4e13ae0c8be210bb7840fbba06eb987c"},
 ]
 
 [package.dependencies]
-requests = ">=2.32.3,<3.0.0"
+annotated-types = "*"
+dataclass-wizard = ">=0.35.0,<1.0"
+requests = ">=2.32.3,<3"
 
 [[package]]
 name = "tomli"
@@ -6696,4 +6720,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.13"
-content-hash = "d4c9ddde57f91ed589dbda6ff26d569feff55b5ffa64a0b91e1a3ef2adf54b11"
+content-hash = "559d8add92ab3d1b1880594af6ed07b0cf5ec17b55c5fb0b8497f957c3a98021"

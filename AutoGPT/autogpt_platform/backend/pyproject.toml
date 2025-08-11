@@ -60,7 +60,7 @@ strenum = "^0.4.9"
 stripe = "^11.5.0"
 supabase = "2.18.0"
 tenacity = "^9.1.2"
-todoist-api-python = "^2.1.7"
+todoist-api-python = "^3.1.0"
 tweepy = "^4.16.0"
 uvicorn = { extras = ["standard"], version = "^0.35.0" }
 websockets = "^15.0"
