@@ -4544,14 +4544,14 @@ sympy = "*"
 
 [[package]]
 name = "openai"
-version = "1.99.5"
+version = "1.99.7"
 description = "The official Python library for the openai API"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "openai-1.99.5-py3-none-any.whl", hash = "sha256:4e870f9501b7c36132e2be13313ce3c4d6915a837e7a299c483aab6a6d4412e9"},
-    {file = "openai-1.99.5.tar.gz", hash = "sha256:aa97ac3326cac7949c5e4ac0274c454c1d19c939760107ae0d3948fc26a924ca"},
+    {file = "openai-1.99.7-py3-none-any.whl", hash = "sha256:ef4165cc4f8872dd4a967d109f12b0b9c98a1e20ae05940c28701729c2883891"},
+    {file = "openai-1.99.7.tar.gz", hash = "sha256:d2f4211642b9dbcd8e3cc6e6ef1180ac149f80d2e5ab1ee7f5afdd8d34c9b33b"},
 ]
 
 [package.dependencies]
@@ -8332,4 +8332,4 @@ benchmark = ["agbenchmark"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "ec7c079630c4b57d1f09f02378b7e7edf605c221df452a829fb806cecc20ef0e"
+content-hash = "e09e2107a03c0f6b852250ebd15aee5a595f8181ba0edb933056b48073781f36"
