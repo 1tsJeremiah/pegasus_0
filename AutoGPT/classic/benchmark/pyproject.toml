@@ -18,7 +18,7 @@ gitpython = "^3.1.32"
 httpx = "^0.24.0"
 matplotlib = "^3.7.2"
 # Multidict 6.0.4 fails to install and is a dependency of aiohttp which is a depenedency of agent-protocol-client
-multidict = "^6.0.5"
+multidict = "^6.6.4"
 networkx = "^3.1"
 openai = "^1.7.2"
 pandas = "^2.0.3"
