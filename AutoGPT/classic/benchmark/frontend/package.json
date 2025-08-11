@@ -16,7 +16,7 @@
     "@prisma/client": "^6.13.0",
     "@t3-oss/env-nextjs": "^0.13.8",
     "next": "^13.4.2",
-    "react": "18.2.0",
+    "react": "19.1.1",
     "react-dom": "18.2.0",
     "tailwind-styled-components": "^2.2.0",
     "vis-data": "^7.1.6",
