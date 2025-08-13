@@ -1851,23 +1851,23 @@ websockets = ["websocket-client (>=1.3.0)"]
 
 [[package]]
 name = "duckduckgo-search"
-version = "6.4.2"
+version = "8.1.1"
 description = "Search for words, documents, images, news, maps and text translation using the DuckDuckGo.com search engine."
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "duckduckgo_search-6.4.2-py3-none-any.whl", hash = "sha256:1e9e64a5379a5330bd99885c053185c9e133eb30f397701fdd6e4f448da1843c"},
-    {file = "duckduckgo_search-6.4.2.tar.gz", hash = "sha256:173c6988cbac1f3ccecc2c645e44e69fc49c4e94c06ee7c09e9dd8ad39d63b0c"},
+    {file = "duckduckgo_search-8.1.1-py3-none-any.whl", hash = "sha256:f48adbb06626ee05918f7e0cef3a45639e9939805c4fc179e68c48a12f1b5062"},
+    {file = "duckduckgo_search-8.1.1.tar.gz", hash = "sha256:9da91c9eb26a17e016ea1da26235d40404b46b0565ea86d75a9f78cc9441f935"},
 ]
 
 [package.dependencies]
-click = ">=8.1.7"
-primp = ">=0.9.1"
+click = ">=8.1.8"
+lxml = ">=5.3.0"
+primp = ">=0.15.0"
 
 [package.extras]
-dev = ["mypy (>=1.13.0)", "pytest (>=8.3.4)", "pytest-asyncio (>=0.25.0)", "ruff (>=0.8.3)"]
-lxml = ["lxml (>=5.3.0)"]
+dev = ["mypy (>=1.14.1)", "pytest (>=8.3.4)", "pytest-dependency (>=0.6.0)", "ruff (>=0.9.2)"]
 
 [[package]]
 name = "durationpy"
@@ -8336,4 +8336,4 @@ benchmark = ["agbenchmark"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "aa28789ae27cf8ba1d3ee7e78933649ea2c758663b1ed09486596eab4381aae2"
+content-hash = "527e2eec8fbd84d39e1379de3497ccdcf32c8f23247ee5c3c61660f77b029a04"
